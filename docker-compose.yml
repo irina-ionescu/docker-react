@@ -1,0 +1,23 @@
+version: '3'
+services:
+  web:
+    stdin_open: true
+    build:
+      context: . #current directory
+      dockerfile: Dockerfile.dev
+      #rebuild with docker-compose down && docker-compose up --build
+    ports:
+      - "3000:3000"
+    volumes:
+      - /app/node_modules
+      - .:/app
+        #current folder outside container to /app folder inside container
+  tests:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    #dash is an array
+    volumes:
+      - /app/node_modules
+      - .:/app
+    command: ["npm", "run", "test"]
