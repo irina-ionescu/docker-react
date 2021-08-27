@@ -1,0 +1,17 @@
+#tell travis we need a copy of docker running; always need sudo
+sudo: required
+language: generic
+services: 
+  - docker
+before_install:
+  #build our image using Dockerfile.dev (cannot use production Dockerfile)
+  # -t tag with docker username/repository name
+  - docker build -t irinaionescu/docker-react -f Dockerfile.dev .
+
+#tell travis how to run our test suite
+#if any of these commands gets a return status code other than 0, then travis assumes build failed
+script:
+  - docker run -e CI=true irinaionescu/docker-react npm run test
+  #npm run test overwrites the default command
+
+#tell travis how to deploy our code to AWS 
