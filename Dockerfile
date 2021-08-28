@@ -10,7 +10,7 @@ RUN npm run build
 
 #run phase; second FROM statement signal a new phase
 FROM nginx
-
+EXPOSE 80
 #copy something(/app/build) from the builder phase to the nginx folder see dockerhib nginex documentation
 #only relevant stuff copied, no npm or alpine stuff from previous phase
 COPY --from=builder /app/build /usr/share/nginx/html
