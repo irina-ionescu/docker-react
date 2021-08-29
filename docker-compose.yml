@@ -4,7 +4,7 @@ services:
     stdin_open: true
     build:
       context: . #current directory
-      dockerfile: Dockerfile.dev
+      dockerfile: Dockerfile
       #rebuild with docker-compose down && docker-compose up --build
     ports:
       - "80:80"
@@ -15,7 +15,7 @@ services:
   tests:
     build:
       context: .
-      dockerfile: Dockerfile.dev
+      dockerfile: Dockerfile
     #dash is an array
     volumes:
       - /app/node_modules
